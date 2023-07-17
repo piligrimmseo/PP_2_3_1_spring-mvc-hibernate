@@ -1,11 +1,13 @@
-package dao;
+package web.dao;
 
-import Model.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import web.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Repository
 public class UserDAOImp implements UserDAO {
         List<User> users;
 

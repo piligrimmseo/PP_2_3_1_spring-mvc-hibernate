@@ -1,4 +1,4 @@
-package Model;
+package web.Model;
 
 public class User {
 
