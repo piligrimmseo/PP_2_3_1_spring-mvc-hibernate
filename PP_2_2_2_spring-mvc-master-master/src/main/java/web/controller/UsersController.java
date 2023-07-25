@@ -1,25 +1,24 @@
 package web.controller;
 
-import web.dao.UserDAO;
-import web.dao.UserDAOImp;
-import web.Model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import web.Model.User;
 import web.service.UserService;
 
 
 @Controller
+
 public class UsersController {
 
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
-
-
-
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -28,13 +27,13 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    public String show (@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("userId", userService.show(id));
-                return "id";
+        return "id";
     }
 
     @GetMapping("/new")
-    public String newUser(Model model){
+    public String newUser(Model model) {
         model.addAttribute("user", new User());
         return "new";
     }
@@ -53,17 +52,16 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") User user, @PathVariable("id") int id){
+    public String update(@ModelAttribute("person") User user, @PathVariable("id") int id) {
         userService.update(id, user);
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
-    public String delete (@PathVariable("id") int id){
+    public String delete(@PathVariable("id") int id) {
         userService.delete(id);
         return "redirect:/";
     }
-
 
 
 }
